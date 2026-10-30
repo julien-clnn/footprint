@@ -9,7 +9,7 @@
 
 ### Type a name, see which accounts belong to you, which belong to your namesakes, and how sure the AI is about every link.
 
-**[▶ Try the interactive demo](https://juca55.github.io/footprint/)**
+**[▶ Try the interactive demo](https://julien-clnn.github.io/footprint/)**
 
 </div>
 
