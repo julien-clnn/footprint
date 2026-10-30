@@ -1,0 +1,33 @@
+/* Places tab: map + list of location clues */
+.pl-map { height: 240px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  overflow: hidden; background: var(--bg); z-index: 0; }
+.pl-map .leaflet-tile-pane { filter: grayscale(0.85) contrast(0.88) brightness(1.06); }
+.pl-map .leaflet-control-attribution { font: 10px/1.4 var(--font-sans); }
+.pl-map .leaflet-bar a { color: var(--ink); }
+.pl-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 12px; }
+.pl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pl-key { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.pl-key.address { background: var(--exposed); }
+.pl-key.city { background: var(--accent); }
+.pl-key.area { border-radius: 3px; background: color-mix(in srgb, var(--exposed) 30%, transparent);
+  border: 1px solid var(--exposed); }
+.pl-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.pl-list > li { padding: 12px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.pl-list > li:last-child { border-bottom: 0; }
+.pl-head { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline;
+  width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: pointer; }
+.pl-head:disabled { cursor: default; }
+.pl-head:hover:not(:disabled) .pl-label { color: var(--accent); }
+.pl-list > li.active .pl-label { color: var(--accent); }
+.pl-label { font-weight: 600; font-size: 14px; overflow-wrap: anywhere; transition: color 0.15s; }
+.pl-level { padding: 1px 7px; border-radius: 5px; font: 600 11px/1.6 var(--font-mono);
+  background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.pl-level.address { background: var(--exposed-soft); color: #b8440a; }
+.pl-level.region, .pl-level.country { background: var(--bg); color: var(--muted); }
+.pl-conf { color: var(--muted); font: 12px/1.5 var(--font-mono); }
+.pl-evidence { list-style: none; margin: 0; padding: 0 0 0 2px; display: grid; gap: 6px; }
+.pl-evidence li { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.pl-evidence .mono { color: var(--ink); }
+.pl-evidence q { margin-top: 3px; }
+.pl-nomap { color: var(--faint); font-size: 12px; }
+@media (max-width: 900px) { .pl-map { height: 200px; } }

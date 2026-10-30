@@ -1,0 +1,35 @@
+/* People around: close people of a found person (details panel). */
+.a-note { margin: 0; font-size: 13px; color: var(--muted); }
+.a-group { display: grid; gap: 8px; }
+.a-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.a-item { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--surface); }
+.a-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.a-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent);
+  background: var(--accent-soft); }
+.a-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.a-strength { flex: none; padding: 1px 7px; border-radius: 5px; background: var(--accent-soft); color: var(--accent);
+  font-size: 11px; }
+.a-via { margin: 0; font-size: 11px; color: var(--faint); }
+.a-evidence { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.a-evidence li { display: grid; gap: 2px; font-size: 13px; }
+.a-evidence q { display: block; padding-left: 10px; border-left: 2px solid var(--line); color: var(--muted);
+  overflow-wrap: anywhere; }
+.a-evidence a { font-size: 11px; text-decoration: none; justify-self: start; }
+.a-evidence a:hover { text-decoration: underline; }
+.a-search { justify-self: start; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px;
+  font-size: 13px; }
+.details > .a-search { height: 40px; margin-top: 4px; }
+.a-link { display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-sm); background: var(--surface); }
+.a-link-ends { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 13px; min-width: 0; }
+.a-link-ends b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.a-link-line { flex: 1 1 24px; min-width: 24px; border-top: 2px dashed var(--accent); opacity: 0.6; }
+.a-link-rel { margin: 0; font-size: 16px; font-weight: 600; color: var(--ink); }
+.a-link-rel::first-letter { text-transform: uppercase; }
+.a-link-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 11px;
+  color: var(--faint); }
+.a-hint { margin: 0; font-size: 11px; color: var(--faint); }
+@media (max-width: 900px) {
+  .a-search { width: 100%; height: 40px; }
+}

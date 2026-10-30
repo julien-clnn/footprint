@@ -1,0 +1,100 @@
+/* Searches around: tray over the graph (top left, under the view switch) and hub card. */
+.sub-tray { position: absolute; top: 64px; left: 20px; z-index: 3; width: min(320px, calc(100% - 40px));
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface);
+  box-shadow: var(--shadow); overflow: hidden; animation: sub-in 0.3s var(--ease) both; }
+@keyframes sub-in { from { opacity: 0; transform: translateY(-6px); } }
+.sub-tray-head { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 12px; border: 0;
+  background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.sub-tray-head .eyebrow { margin: 0; }
+.sub-live { font: 500 11px var(--font-mono); color: var(--accent); }
+.sub-chevron { margin-left: auto; width: 7px; height: 7px; border-right: 1.5px solid var(--faint);
+  border-bottom: 1.5px solid var(--faint); transform: rotate(45deg) translateY(-2px); transition: transform 0.2s; }
+.sub-tray.folded .sub-chevron { transform: rotate(-135deg) translateY(-2px); }
+.sub-tray ul { list-style: none; margin: 0; padding: 0 6px 6px; display: grid; gap: 2px; max-height: 40vh;
+  overflow: auto; }
+
+.sub-row { position: relative; display: flex; align-items: center; gap: 2px; border-radius: 8px;
+  animation: sub-in 0.3s var(--ease) both; }
+.sub-row.done { animation: sub-added 1.6s var(--ease) both; }
+@keyframes sub-added { 0% { background: var(--accent-soft); } 100% { background: transparent; } }
+.sub-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 8px 6px; border: 0;
+  border-radius: 8px; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.sub-main:hover { background: var(--bg); }
+.sub-text { min-width: 0; display: grid; gap: 1px; }
+.sub-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sub-sum { font: 11px var(--font-mono); color: var(--faint); overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sub-row.error .sub-sum { color: var(--exposed); }
+.sub-row.hidden .sub-name { color: var(--muted); }
+
+.sub-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent);
+  background: var(--accent); }
+.sub-row.queued .sub-dot { background: none; border-style: dashed; border-color: var(--faint); }
+.sub-row.running .sub-dot { background: var(--accent-soft); animation: sub-ping 1.4s ease-out infinite; }
+.sub-row.hidden .sub-dot { background: none; }
+.sub-row.error .sub-dot { background: var(--exposed); border-color: var(--exposed); }
+@keyframes sub-ping { 0% { box-shadow: 0 0 0 0 rgb(79 70 229 / 45%); } 100% { box-shadow: 0 0 0 8px rgb(79 70 229 / 0%); } }
+
+.sub-icon { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 7px;
+  background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.sub-icon:hover { background: var(--bg); color: var(--ink); }
+.sub-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
+.sub-main:focus-visible, .sub-icon:focus-visible, .sub-tray-head:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: -2px; }
+
+.sub-bar { position: absolute; left: 8px; right: 8px; bottom: 2px; height: 2px; border-radius: 2px;
+  background: var(--line); overflow: hidden; }
+.sub-bar span { display: block; height: 100%; background: var(--accent); transition: width 0.6s var(--ease);
+  position: relative; overflow: hidden; }
+.sub-bar span::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 70%), transparent);
+  animation: sub-shine 1.3s linear infinite; }
+@keyframes sub-shine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.sub-bar.big { position: static; display: block; height: 6px; border-radius: 6px; }
+
+.sub-spinner { flex: none; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent-soft);
+  border-top-color: var(--accent); animation: sub-spin 0.8s linear infinite; }
+@keyframes sub-spin { to { transform: rotate(360deg); } }
+
+/* Hub card (details panel) */
+.hub-progress { gap: 10px; }
+.hub-phase { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
+.hub-phase .mono { margin-left: auto; color: var(--faint); font-weight: 400; }
+.hub-latest { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.hub-latest li { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px;
+  animation: sub-in 0.35s var(--ease) both; }
+.hub-latest li:first-child .focus-code { background: var(--accent); color: #fff; }
+.hub-latest-name { font-weight: 600; white-space: nowrap; }
+.hub-latest .mono { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--faint); }
+.hub-people { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.hub-people button { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 10px 12px;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer;
+  text-align: left; color: inherit; font: inherit; }
+.hub-people button:hover:not(:disabled) { border-color: var(--accent); }
+.hub-people button:disabled { cursor: default; opacity: 0.6; }
+.hub-people b { font-size: 14px; }
+.hub-people .mono { grid-column: 1 / -1; color: var(--faint); }
+.hub-codes { grid-row: 1; grid-column: 2; display: flex; gap: 3px; }
+.hub-codes span { padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px;
+  font: 600 9px var(--font-mono); color: var(--muted); }
+.hub-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .sub-tray { top: 56px; left: 10px; right: 10px; width: auto; }
+  .sub-tray ul { max-height: 24vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sub-row.running .sub-dot, .sub-bar span::after, .sub-spinner { animation: none; }
+}
+
+/* Hints of a search on a first name alone, pre-filled from the page that names them. */
+.hub-hints { display: grid; gap: 10px; margin: 12px 0; }
+.hub-field { display: grid; gap: 4px; }
+.hub-field input {
+  font: inherit; font-size: 13px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--ink); min-width: 0;
+}
+.hub-field input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.hub-field input:disabled { opacity: 0.6; }
+.hub-hints .btn { justify-self: start; }
+.hub-tocheck { color: var(--exposed, var(--muted)); }

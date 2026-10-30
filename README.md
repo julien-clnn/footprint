@@ -9,7 +9,7 @@
 
 ### Type a name, see which accounts belong to you, which belong to your namesakes, and how sure the AI is about every link.
 
-**[▶ Try the interactive demo](https://julien-clnn.github.io/footprint-demo/)**
+**[▶ Try the interactive demo](https://julien-clnn.github.io/footprint/)**
 
 </div>
 
@@ -21,13 +21,14 @@
 
 ## What this repository is
 
-A **public, read-only preview of the interface** of Footprint, a personal-exposure tool.
-It holds only the compiled web page and a recorded run of the offline demo:
+The **interface** of Footprint, a personal-exposure tool, with a recorded run of its offline demo.
+It is display code only:
 
-- **no backend, no source code, no AI call, no network search**: the page cannot look anyone up;
-- clicking **Try the demo** replays a recorded search on the fictional Jean Dupont, step by step,
-  exactly as the real app streams it;
-- a real search typed in the form is refused with a message.
+- **no backend, no AI call, no network search**: the page cannot look anyone up, and there is no
+  field to type a name;
+- **Try demo** replays a recorded search on the fictional Jean Dupont, step by step, exactly as the
+  real app streams it; `src/mock.js` answers the API calls in the browser;
+- the search pipeline (sources, entity resolution, verification, scoring) stays private.
 
 The goal is to let anyone see the tool, click through it and understand what it does.
 
@@ -66,11 +67,11 @@ be traced back to the collected data. That part is **not** in this repository.
 | | |
 |---|---|
 | ![Landing page](docs/landing.png) | ![Search in progress](docs/progress.png) |
-| **Start**: a name and optional hints (city, job, username). | **Progress**: the four phases stream live. |
+| **Start**: one button runs the demo search on Jean Dupont. | **Progress**: the four phases stream live. |
 | ![Result graph](docs/graph.png) | ![Search around a person](docs/around.png) |
 | **Result**: one cluster per namesake, the other results aside. | **People around**: a connected person is searched on the same graph. |
 
-Things to try in the demo:
+Things to try in the demo, after clicking **Try demo**:
 
 1. Click a person in the left column, then the **Known**, **Places**, **Photos** and **People around** tabs.
 2. Turn on **Shared details** and **Weak links** in the toolbar to see why accounts are tied together.
@@ -81,20 +82,33 @@ Things to try in the demo:
 
 | Area | Details |
 |---|---|
-| Frontend (this repo, compiled) | React + Vite, Cytoscape graph (fCoSE layout), Leaflet maps |
+| Interface (this repo) | React 19 + Vite, Cytoscape graph (fCoSE layout), Leaflet maps |
+| Demo data | A recorded run of the offline demo (`src/demo-data.json`), replayed by `src/mock.js` |
+| Hosting | GitHub Pages, built by GitHub Actions on every push (`.github/workflows/pages.yml`) |
 | Backend (private) | Python 3.12, FastAPI, Server-Sent Events, LangGraph state graph |
 | AI (private) | DeepSeek or Mistral, a second pass that verifies every AI link |
-| Demo | A recorded run of the offline demo, replayed in the browser |
+
+## Repository layout
+
+```
+src/
+  App.jsx, Landing.jsx, Progress.jsx     pages: start, search in progress, result
+  Graph.jsx, graph.js                    the graph (Cytoscape) and how a result becomes nodes
+  Details.jsx, People.jsx, Leads.jsx     person panel, people list, other results
+  Around.jsx, Subsearches.jsx            people around, searches drawn on the graph
+  Places.jsx, Photos.jsx, exposure.jsx   map, photos, exposure score
+  mock.js, demo-data.json                the in-browser API and the recorded demo
+public/demo/                             demo illustrations (not real photos)
+```
 
 ## Run it locally
 
-Any static server works, for example:
-
 ```bash
-python3 -m http.server 8000
+npm ci
+npm run dev        # http://localhost:5200
 ```
 
-then open <http://localhost:8000>.
+`npm run build` writes the static site to `dist/`.
 
 ## Responsible use
 
@@ -103,4 +117,4 @@ shown here is fictional; any resemblance to a real person is coincidental.
 
 ## License
 
-© Julien. All rights reserved: the compiled code is published for viewing the demo only.
+© Julien. All rights reserved: the code is published so the demo can be viewed and read.

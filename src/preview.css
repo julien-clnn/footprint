@@ -1,0 +1,41 @@
+/* Landing preview illustration */
+.landing-preview { position: relative; display: flex; align-items: center; justify-content: center;
+  padding: 24px; overflow: hidden; }
+.preview-svg { width: 100%; height: auto; max-height: 100%; overflow: visible; }
+.preview-caption { position: absolute; left: 24px; bottom: 18px; margin: 0; font: 12px var(--font-mono);
+  color: var(--faint); }
+
+.pv-label { font: 600 8px var(--font-sans); fill: var(--muted); }
+.pv-label.strong { font-size: 9px; font-weight: 700; fill: var(--ink); }
+.pv-score { fill: var(--exposed); }
+.pv-tag { font: 700 6px var(--font-mono); fill: var(--ink); pointer-events: none; }
+.pv-tag.muted { fill: var(--muted); }
+.pv-card { fill: var(--surface); stroke: var(--line); }
+.pv-chip { fill: var(--surface); stroke: var(--line); }
+.pv-box { fill: var(--exposed-soft); stroke: var(--exposed); stroke-width: 1.5; }
+.pv-account { fill: var(--surface); stroke: var(--exposed); stroke-width: 1.5; }
+.pv-fact { fill: var(--surface); stroke: var(--teal); stroke-width: 1.5; }
+.pv-unknown { fill: var(--surface); stroke: var(--faint); stroke-dasharray: 2 2; }
+.pv-pill rect { fill: var(--accent); }
+.pv-pill text { font: 700 8px var(--font-sans); fill: #fff; }
+
+.pv-link { stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
+.pv-link.pv-trunk { stroke: var(--line); stroke-width: 1.2; }
+.pv-link.inferred { stroke: var(--accent); stroke-dasharray: 4 3; }
+.pv-link.lead { stroke: var(--teal); stroke-width: 1; stroke-dasharray: 5 2 1 2; }
+.pv-link.weak { stroke: var(--exposed); stroke-width: 1; stroke-dasharray: 1 2.5; opacity: 0.7; }
+.pv-link.fact { stroke: var(--teal); stroke-width: 1; stroke-dasharray: 1 2.5; }
+
+/* One-shot entrance, then a gentle float. */
+.pv-link, .pv-fade { animation: pv-fade 0.6s var(--ease) var(--d, 0s) both; }
+.pv-pop { transform-box: fill-box; transform-origin: center; animation: pv-pop 0.45s var(--ease) var(--d, 0s) both; }
+.pv-pill { transform-box: fill-box; transform-origin: center; animation: pv-pop 0.5s var(--ease) both; }
+.pv-float { animation: pv-fade 0.6s var(--ease) var(--d, 0s) both, pv-float 6s ease-in-out calc(var(--d, 0s) + 0.6s) infinite alternate; }
+.pv-person { animation: pv-float 7s ease-in-out 1s infinite alternate-reverse; }
+@keyframes pv-fade { from { opacity: 0; } }
+@keyframes pv-pop { from { opacity: 0; transform: scale(0.6); } }
+@keyframes pv-float { to { transform: translateY(-4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-link, .pv-fade, .pv-pop, .pv-pill, .pv-float, .pv-person { animation: none; }
+}
