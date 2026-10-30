@@ -2,10 +2,10 @@
 
 # footprint
 
-![Demo](https://img.shields.io/badge/demo-interface_only-blueviolet)
-![React](https://img.shields.io/badge/frontend-React_+_Vite-149eca)
-![Backend](https://img.shields.io/badge/backend-not_included-lightgrey)
-![Data](https://img.shields.io/badge/data-fictional-orange)
+![Demo](docs/badges/demo.svg)
+![React](docs/badges/frontend.svg)
+![Backend](docs/badges/backend.svg)
+![Data](docs/badges/data.svg)
 
 ### Type a name, see which accounts belong to you, which belong to your namesakes, and how sure the AI is about every link.
 
